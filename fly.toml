@@ -1,0 +1,22 @@
+app = "твое-уникальное-имя"
+primary_region = "ams" # Амстердам (ближе к серверам Telegram)
+
+[build]
+  dockerfile = "Dockerfile"
+
+# Отключаем авто-остановку, чтобы бот работал 24/7 (long polling)
+[http_service]
+  internal_port = 8080
+  force_https = true
+  auto_stop_machines = "off"
+  auto_start_machines = true
+  min_machines_running = 1
+
+[[vm]]
+  size = "shared-cpu-1x"
+  memory = "256mb"
+
+# Монтируем диск для базы данных SQLite
+[[mounts]]
+  source = "data"
+  destination = "/var/data"
